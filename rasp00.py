@@ -49,46 +49,45 @@ while True:
         setText("Weight:" + w + "g")
         
         if val == 0:
-            print "Add item to scale (max. load 700g)"
-            setText("Weight:" + w + "g\n" + "Add item max.700")
-            
-			#Set auth variables
-			def get_api(cfg):
-				auth = tweepy.OAuthHandler(cfg['consumer_key'], cfg['consumer_secret'])
-				auth.set_access_token(cfg['access_token'], cfg['access_token_secret'])
-				return tweepy.API(auth)
+		print "Add item to scale (max. load 700g)"
+            	setText("Weight:" + w + "g\n" + "Add item max.700")
+            	#Set auth variables
+		def get_api(cfg):
+		auth = tweepy.OAuthHandler(cfg['consumer_key'], cfg['consumer_secret'])
+		auth.set_access_token(cfg['access_token'], cfg['access_token_secret'])
+		return tweepy.API(auth)
 
-			#Create a function to hold values of keys. The values have been omitted for privacy.
-			#To run this code please enter your own API values
-			def main():
-				cfg = { 
-					"consumer_key"        : "YOUR API KEY",
-					"consumer_secret"     : "YOUR API SECRET",
-					"access_token"        : "YOUR ACCESS TOKEN",
-					"access_token_secret" : "YOUR ACCESS TOKEN SECRET" 
-				}
+		#Create a function to hold values of keys. The values have been omitted for privacy.
+		#To run this code please enter your own API values
+		def main():
+			cfg = { 
+				"consumer_key"        : "YOUR API KEY",
+				"consumer_secret"     : "YOUR API SECRET",
+				"access_token"        : "YOUR ACCESS TOKEN",
+				"access_token_secret" : "YOUR ACCESS TOKEN SECRET" 
+			}
 				
-				#Create a new api
-                api = get_api(cfg)
-                tweet = "***Supplies completely depleted!***"
-                #Add time to message.To prevent the program posting tweets to often
-                #the placeholder for mins (%M) could be omiited to restrict updates to every hour
-                #or the time could be completely omitted (%-I:%M%P) to restrict updates to once a day
-                time = datetime.now().strftime('%-I:%M%P on %d-%m-%Y')
+			#Create a new api
+                	api = get_api(cfg)
+                	tweet = "***Supplies completely depleted!***"
+                	#Add time to message.To prevent the program posting tweets to often
+                	#the placeholder for mins (%M) could be omiited to restrict updates to every hour
+                	#or the time could be completely omitted (%-I:%M%P) to restrict updates to once a day
+                	time = datetime.now().strftime('%-I:%M%P on %d-%m-%Y')
                 
-                try:
-                	#A tweet is referred to as 'status'
-                    status = api.update_status(status=tweet + " @ " + time)
-                #Tweepy throws an error and the program crashes if a duplicate message is sent
-                #This exception allows the program to continue running without duplicating messages
-                except tweepy.TweepError as error:
-                    if error.api_code == 187:
-                        print('Duplicate message: No tweet sent')
-                    else:
-                        raise error
+                	try:
+                		#A tweet is referred to as 'status'
+                    		status = api.update_status(status=tweet + " @ " + time)
+                	#Tweepy throws an error and the program crashes if a duplicate message is sent
+                	#This exception allows the program to continue running without duplicating messages
+			except tweepy.TweepError as error:
+				if error.api_code == 187:
+                        		print('Duplicate message: No tweet sent')
+                    	else:
+                        	raise error
                             
-            if __name__ == "__main__":
-                main()
+            	if __name__ == "__main__":
+                	main()
                 
         #While loop to detect when the weight drops below a determined level (100g in this case)    
         while val != 0:
@@ -99,29 +98,29 @@ while True:
                     auth.set_access_token(cfg['access_token'], cfg['access_token_secret'])
                     return tweepy.API(auth)
 
-				#Create a function to hold values of keys. The values have been omitted for privacy.
-				#To run this code please enter your own API values
-				def main():
-					cfg = { 
-						"consumer_key"        : "YOUR API KEY",
-						"consumer_secret"     : "YOUR API SECRET",
-						"access_token"        : "YOUR ACCESS TOKEN",
-						"access_token_secret" : "YOUR ACCESS TOKEN SECRET" 
-                    }
+		#Create a function to hold values of keys. The values have been omitted for privacy.
+		#To run this code please enter your own API values
+		def main():
+			cfg = { 
+				"consumer_key"        : "YOUR API KEY",
+				"consumer_secret"     : "YOUR API SECRET",
+				"access_token"        : "YOUR ACCESS TOKEN",
+				"access_token_secret" : "YOUR ACCESS TOKEN SECRET" 
+                    	}
                     
-					#Create a new api
-                    api = get_api(cfg)
-                    tweet = "Warning: Supplies low! Please stock up."
-                    time = datetime.now().strftime('%-I:%M%P on %d-%m-%Y')
+			#Create a new api
+                    	api = get_api(cfg)
+                    	tweet = "Warning: Supplies low! Please stock up."
+                    	time = datetime.now().strftime('%-I:%M%P on %d-%m-%Y')
                     
-                    try:
-                    	#A tweet is referred to as 'status'
-                        status = api.update_status(status=tweet + " @ " + time)
-                    #Tweepy throws an error and the program crashes if a duplicate message is sent
-                	#This exception allows the program to continue running without duplicating messages
-                    except tweepy.TweepError as error:
-                        if error.api_code == 187:
-                            print('Duplicate message: No tweet sent')
+                    	try:
+                    		#A tweet is referred to as 'status'
+                        	status = api.update_status(status=tweet + " @ " + time)
+                    	#Tweepy throws an error and the program crashes if a duplicate message is sent
+			#This exception allows the program to continue running without duplicating messages
+                    	except tweepy.TweepError as error:
+                        	if error.api_code == 187:
+                            		print('Duplicate message: No tweet sent')
                         else:
                             raise error
                         
